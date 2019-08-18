@@ -4,12 +4,6 @@ const { Pool } = require("pg");
 const redis = require("redis");
 const keys = require("./keys");
 
-// import cors from "cors";
-// import express from "express";
-// import { Pool } from "pg";
-// import redis from "redis";
-// import keys from "./keys";
-
 // express app setup
 const app = express();
 app.use(cors());
