@@ -11,11 +11,10 @@ services:
     image: samirprakash/multi-tier/nginx:develop
     restart: always
     ports:
-      - 3050:80
+      - 8080:80
     depends_on: 
       - client
       - api
-      - worker
   client:
     build:
       context: ./client
@@ -24,6 +23,8 @@ services:
     volumes:
       - /app/node_modules
       - ./client:/app
+    depends_on: 
+      - api
   api:
     build:
       context: ./api
@@ -51,5 +52,8 @@ services:
     volumes:
       - /app/node_modules
       - ./worker:/app
+    environment: 
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
     depends_on: 
       - redis
