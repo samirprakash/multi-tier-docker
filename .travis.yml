@@ -3,21 +3,21 @@ services:
   - docker
 
 before_install:
-  docker build -t samirprakash/multi-tier/client:test -f ./client/Dockerfile.dev ./client
+  docker build -t $DOCKER_ID/multi-tier/client:test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run samirprakash/multi-tier/client:test npm run test -- --coverage --watchAll=false
+  - docker run $DOCKER_ID/multi-tier/client:test npm run test -- --coverage --watchAll=false
 
 after_success:
-  - docker build -t samirprakash/multi-tier/client ./client
-  - docker build -t samirprakash/multi-tier/nginx ./nginx
-  - docker build -t samirprakash/multi-tier/api ./api
-  - docker build -t samirprakash/multi-tier/worker ./worker
+  - docker build -t $DOCKER_ID/multi-tier/client ./client
+  - docker build -t $DOCKER_ID/multi-tier/nginx ./nginx
+  - docker build -t $DOCKER_ID/multi-tier/api ./api
+  - docker build -t $DOCKER_ID/multi-tier/worker ./worker
 
-  - docker login -u $DOCKER_ID -p $DOCKER_PASSWORD
+  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID -password-stdin
 
-  - docker push samirprakash/multi-tier/client
-  - docker push samirprakash/multi-tier/nginx
-  - docker push samirprakash/multi-tier/api
-  - docker push samirprakash/multi-tier/worker
+  - docker push docker.io/$DOCKER_ID/multi-tier/client
+  - docker push docker.io/$DOCKER_ID/multi-tier/nginx
+  - docker push docker.io/$DOCKER_ID/multi-tier/api
+  - docker push docker.io/$DOCKER_ID/multi-tier/worker
 
