@@ -9,15 +9,15 @@ script:
   - docker run $DOCKER_ID/multi-tier/client:test npm run test -- --coverage --watchAll=false
 
 after_success:
-  - docker build -t $DOCKER_ID/multi-tier/client ./client
-  - docker build -t $DOCKER_ID/multi-tier/nginx ./nginx
-  - docker build -t $DOCKER_ID/multi-tier/api ./api
-  - docker build -t $DOCKER_ID/multi-tier/worker ./worker
+  - docker build -t $DOCKER_ID/multi-tier-client ./client
+  - docker build -t $DOCKER_ID/multi-tier-nginx ./nginx
+  - docker build -t $DOCKER_ID/multi-tier-api ./api
+  - docker build -t $DOCKER_ID/multi-tier-worker ./worker
 
   - echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin
 
-  - docker push $DOCKER_ID/multi-tier/client
-  - docker push $DOCKER_ID/multi-tier/nginx
-  - docker push $DOCKER_ID/multi-tier/api
-  - docker push $DOCKER_ID/multi-tier/worker
+  - docker push $DOCKER_ID/multi-tier-client
+  - docker push $DOCKER_ID/multi-tier-nginx
+  - docker push $DOCKER_ID/multi-tier-api
+  - docker push $DOCKER_ID/multi-tier-worker
 
