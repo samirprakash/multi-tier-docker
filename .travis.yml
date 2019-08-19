@@ -23,16 +23,15 @@ after_success:
 
 deploy:
   provider: elasticbeanstalk
-  regon: us-east-2
-  app: multi-tier-docker
-  env: MultiTierDocker-env
-  bucket_name: elasticbeanstalk-us-east-2-778031872823
-  bucket_path: multi-tier-docker
-  on:
-    branch: master
   access_key_id:
     secure: $AWS_ACCESS_KEY
   secret_access_key:
     secure: $AWS_SECRET_KEY
+  region: us-east-2
+  app: multi-tier-docker
+  env: MultiTierDocker-env
+  bucket_name: elasticbeanstalk-us-east-2-778031872823
+  on:
+    branch: master
 
 
