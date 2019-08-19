@@ -1,5 +1,7 @@
 # Multi Tier Docker Application
 
+[![Build Status](https://travis-ci.org/samirprakash/multi-tier-docker.svg?branch=master)](https://travis-ci.org/samirprakash/multi-tier-docker)
+
 #### Architecture
 
 ![alt project architecture](./screenshots/multi-tier-docker-app-architecture.png)
