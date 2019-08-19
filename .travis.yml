@@ -1,0 +1,23 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  docker build -t samirprakash/multi-tier/client:test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run samirprakash/multi-tier/client:test npm run test -- --coverage --watchAll=false
+
+after_success:
+  - docker build -t samirprakash/multi-tier/client ./client
+  - docker build -t samirprakash/multi-tier/nginx ./nginx
+  - docker build -t samirprakash/multi-tier/api ./api
+  - docker build -t samirprakash/multi-tier/worker ./worker
+
+  - docker login -u $DOCKER_ID -p $DOCKER_PASSWORD
+
+  - docker push samirprakash/multi-tier/client
+  - docker push samirprakash/multi-tier/nginx
+  - docker push samirprakash/multi-tier/api
+  - docker push samirprakash/multi-tier/worker
+
