@@ -11,3 +11,7 @@
 #### Production Multi Container Setup
 
 ![alt multi container setup](./screenshots/multi-tier-production-setup.png)
+
+#### Production ECS setup architecture
+
+![alt ESC setup](./screenshots/multi-tier-aws-eb.png)
