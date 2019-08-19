@@ -1,5 +1,5 @@
 {
-  "name": "server",
+  "name": "api",
   "version": "1.0.0",
   "description": "Express server for handling incoming user requests",
   "main": "index.js",

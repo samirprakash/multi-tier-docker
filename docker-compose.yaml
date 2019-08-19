@@ -12,14 +12,14 @@ services:
     volumes:
       - /app/node_modules
       - ./client:/app
-  server:
+  api:
     build:
-      context: ./server
+      context: ./api
       dockerfile: Dockerfile.dev
-    image: samirprakash/multi-tier/server:develop
+    image: samirprakash/multi-tier/api:develop
     volumes:
       - /app/node_modules
-      - ./server:/app
+      - ./api:/app
     environment: 
       - REDIS_HOST=redis
       - REDIS_PORT=6379
