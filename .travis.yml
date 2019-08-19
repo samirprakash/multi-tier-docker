@@ -14,10 +14,10 @@ after_success:
   - docker build -t $DOCKER_ID/multi-tier/api ./api
   - docker build -t $DOCKER_ID/multi-tier/worker ./worker
 
-  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID -password-stdin
+  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_ID --password-stdin
 
-  - docker push docker.io/$DOCKER_ID/multi-tier/client
-  - docker push docker.io/$DOCKER_ID/multi-tier/nginx
-  - docker push docker.io/$DOCKER_ID/multi-tier/api
-  - docker push docker.io/$DOCKER_ID/multi-tier/worker
+  - docker push $DOCKER_ID/multi-tier/client
+  - docker push $DOCKER_ID/multi-tier/nginx
+  - docker push $DOCKER_ID/multi-tier/api
+  - docker push $DOCKER_ID/multi-tier/worker
 
