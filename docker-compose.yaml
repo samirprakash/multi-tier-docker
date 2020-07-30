@@ -1,9 +1,11 @@
-version: "3.7"
-services: 
+version: '3.7'
+services:
   postgres:
-    image: "postgres"
+    image: 'postgres:9.5.18'
+    environment:
+      - POSTGRES_PASSWORD=postgres_password
   redis:
-    image: "redis"
+    image: 'redis'
   nginx:
     build:
       context: ./nginx
@@ -12,7 +14,7 @@ services:
     restart: always
     ports:
       - 8080:80
-    depends_on: 
+    depends_on:
       - client
       - api
   client:
@@ -23,7 +25,7 @@ services:
     volumes:
       - /app/node_modules
       - ./client:/app
-    depends_on: 
+    depends_on:
       - api
   api:
     build:
@@ -33,7 +35,7 @@ services:
     volumes:
       - /app/node_modules
       - ./api:/app
-    environment: 
+    environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
       - PGHOST=postgres
@@ -41,7 +43,7 @@ services:
       - PGDATABASE=postgres
       - PGPASSWORD=postgres_password
       - PGUSER=postgres
-    depends_on: 
+    depends_on:
       - postgres
       - redis
   worker:
@@ -52,8 +54,8 @@ services:
     volumes:
       - /app/node_modules
       - ./worker:/app
-    environment: 
+    environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-    depends_on: 
+    depends_on:
       - redis
